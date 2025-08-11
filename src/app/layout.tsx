@@ -1,17 +1,13 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
+import { routing } from '@/i18n/routing';
+import { redirect } from 'next/navigation';
 
-const inter = Inter({ subsets: ['latin'] });
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="pt" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+// This is the minimal root layout that redirects to locale-based routing
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // This layout should never actually render because middleware handles redirects
+  // But we need it for Next.js structure
+  return children;
 }
