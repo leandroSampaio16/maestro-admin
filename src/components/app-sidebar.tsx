@@ -10,6 +10,7 @@ import {
   Users,
 } from "lucide-react";
 import { AdminNavDropdown } from "@/components/admin-nav-dropdown";
+import { AdminUsersNavDropdown } from "@/components/admin-users-nav-dropdown";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { usePathname } from "@/i18n/navigation";
@@ -88,6 +89,9 @@ function SimpleNavMain({
         {/* Admin Dropdown for Organizations */}
         <AdminNavDropdown />
         
+        {/* Admin Dropdown for Users */}
+        <AdminUsersNavDropdown />
+        
         {items.map((item) => (
           <SidebarMenuItem key={item.title}>
             <SidebarMenuButton
@@ -130,6 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { theme } = useTheme();
   const { data: session, isPending } = authClient.useSession();
   const t = useTranslations("Sidebar.navigation");
+  const pathname = usePathname();
 
   const getInitials = (name: string): string => {
     return name
@@ -162,7 +167,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <AppHeader theme={theme} state={state} />
       </SidebarHeader>
       <SidebarContent>
-        <SimpleNavMain items={getNavigationData(t).navMain} />
+        <SimpleNavMain 
+          items={getNavigationData(t).navMain}
+        />
       </SidebarContent>
       <SidebarFooter>
         <SidebarOrgSelector />
